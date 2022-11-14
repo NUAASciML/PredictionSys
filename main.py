@@ -1,4 +1,3 @@
-import pickle
 import os
 import pickle
 import tkinter as tk
@@ -103,15 +102,9 @@ class MyTk(tk.Tk):
         self.max_min = None
 
         # 模型
-        # self.model_path_1 = "./model/deeponet_1.h5"
-        # self.model_path_2 = "./model/deeponet_2.h5"
-        # self.model_path_3 = "./model/deeponet_3.h5"
-        # self.model_path_1 = "./model/new/deeponet_1.h5"
-        # self.model_path_2 = "./model/new/deeponet_2.h5"
-        # self.model_path_3 = "./model/new/deeponet_3.h5"
-        self.model_path_1 = "./model/new1/deeponet_1.h5"
-        self.model_path_2 = "./model/new1/deeponet_2.h5"
-        self.model_path_3 = "./model/new1/deeponet_3.h5"
+        self.model_path_1 = "./model/deeponet_1.h5"
+        self.model_path_2 = "./model/deeponet_2.h5"
+        self.model_path_3 = "./model/deeponet_3.h5"
         self.init_model_1 = deeponet()
         self.init_model_1.build(input_shape=[(10000, 1), (10000, 1), (10000, 2)])
         self.init_model_2 = deeponet()
@@ -208,10 +201,6 @@ class MyTk(tk.Tk):
                             x_id2 = temp_x2.argsort(axis=0)
                             self.x2 = temp_x2[x_id2]
                             self.y2 = temp_y2[x_id2]
-
-                            # index_x1 = (0 <= x) & (x <= 1.001)
-                            # index_y1 = (0 <= y) & (y <= 0.06)
-                            # index_all1 = index_x1 & index_y1
                             self.x1 = self.x2
                             self.y1 = -self.y2
 
@@ -265,7 +254,9 @@ class MyTk(tk.Tk):
                 os.makedirs(self.result_path)
             # 用攻角、马赫数、时间给结果命名
             now_time = datetime.now().strftime("%Y-%m-%d-%H-%M-%S").replace('-', '')
-            np.savetxt(self.result_path + f"aoa{self.aoa}_mach{self.mach}_result_{now_time}.pkl", self.result)
+            output = open(self.result_path + f"aoa{self.aoa}_mach{self.mach}_result_{now_time}.pkl", 'wb')
+            pickle.dump(self.result, output)
+            output.close()
             messagebox.showinfo("提示", "结果导出成功")
 
     def exit(self):
@@ -302,8 +293,8 @@ class MyTk(tk.Tk):
                 self.ax.fill_between(self.x1, self.y1, facecolor='white')
                 self.ax.fill_between(self.x2, self.y2, facecolor='white')
 
-                self.ax.set_xlim(-0.25, 1.25)
-                self.ax.set_ylim(-0.25, 0.25)
+                self.ax.set_xlim(-0.5, 1.5)
+                self.ax.set_ylim(-1.0, 1.0)
                 self.ax.set_xlabel("X")
                 self.ax.set_ylabel("Y")
                 self.figure.colorbar(cax)
@@ -331,8 +322,8 @@ class MyTk(tk.Tk):
                 self.ax.fill_between(self.x1, self.y1, facecolor='white')
                 self.ax.fill_between(self.x2, self.y2, facecolor='white')
 
-                self.ax.set_xlim(-0.25, 1.25)
-                self.ax.set_ylim(-0.25, 0.25)
+                self.ax.set_xlim(-0.5, 1.5)
+                self.ax.set_ylim(-1.0, 1.0)
                 self.ax.set_xlabel("X")
                 self.ax.set_ylabel("Y")
                 self.figure.colorbar(cax)
