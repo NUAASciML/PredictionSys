@@ -160,8 +160,8 @@ class MyTk(tk.Tk):
         self.button_predict = tk.Button(self.left_frame, text="预测结果", width=100, command=self.predict)
         self.button_predict.pack()
         # 展示
-        self.button_predict = tk.Button(self.left_frame, text="结果展示", width=100, command=self.visualize)
-        self.button_predict.pack()
+        # self.button_predict = tk.Button(self.left_frame, text="结果展示", width=100, command=self.visualize)
+        # self.button_predict.pack()
         # 导出结果
         self.button_export = tk.Button(self.left_frame, text="导出结果", width=100, command=self.export)
         self.button_export.pack()
@@ -230,6 +230,7 @@ class MyTk(tk.Tk):
                                         self.result[i] = self.result[i] * (self.max_min[i, 0] - self.max_min[i, 1]) + self.max_min[i, 1]
                                     self.result = self.result.T
                                     messagebox.showinfo("提示", "结果预测成功")
+                                    self.visualize(1)
                                 else:
                                     messagebox.showerror("错误", "归一化文件不存在")
                             else:
@@ -272,7 +273,7 @@ class MyTk(tk.Tk):
                 self.sub_button1.pack(side='left')
                 self.sub_button2 = tk.Button(self.top_frame, text="y分量速度", width=20, command=lambda: self.visualize(2))
                 self.sub_button2.pack(side='left')
-                self.sub_button3 = tk.Button(self.top_frame, text="压力值", width=20, command=lambda: self.visualize(4))
+                self.sub_button3 = tk.Button(self.top_frame, text="压力值", width=20, command=lambda: self.visualize(3))
                 self.sub_button3.pack(side='left')
 
                 self.figure = Figure(figsize=(7, 4.2), dpi=100)
@@ -300,7 +301,8 @@ class MyTk(tk.Tk):
                 self.figure.colorbar(cax)
                 self.canvas.draw()
                 self.canvas.get_tk_widget().pack()
-                self.toolbar = NavigationToolbar2Tk(self.canvas, self.right_frame, pack_toolbar=False)
+                # self.toolbar = NavigationToolbar2Tk(self.canvas, self.right_frame, pack_toolbar=False)
+                self.toolbar = NavigationToolbar2Tk(self.canvas, self.right_frame)
                 self.toolbar.update()
                 self.toolbar.pack()
                 self.first_draw = False
