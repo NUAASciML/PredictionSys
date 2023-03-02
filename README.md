@@ -2,6 +2,8 @@
 
 在这个仓库中，我们上传了预测系统的源代码和预训练好的AI模型。除此之外，我们会给出一些指导，以便用户更好地使用我们的软件。
 
+[赛题背景链接](http://data.aicnic.cn/dms-html/dataset_detail.html?id=742)
+
 ## Python环境安装
 
 首先，打开命令行，然后输入 `python`。如果你已经成功安装了`python`，你将看到与它的版本相关的信息和其他内容。否则，你需要安装`python`。
@@ -30,7 +32,7 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
    python main.py
    ```
 
-2. 进入主界面以后，输入攻角和马赫数，点击“`预测结果`”按钮，系统开始对流场物理量进行预测。
+2. 进入主界面以后，输入攻角[-10,10]和马赫数[0,1]，点击“`预测结果`”按钮，系统开始对流场物理量进行预测。
 
 3. 待系统提示“`结果预测成功后`”，系统自动进行预测结果的可视化。
 
@@ -40,7 +42,7 @@ pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 
 ## 模型的重新训练
 
-打开项目根目录下的`deeponet.ipynb`文件（推荐使用`jupyter notebook`打开），设置想要训练的轮数`num_epochs`和批大小`batchsize`，然后运行即可。
+本项目已经自带训练好的3个模型，如果需要重新训练新的模型，打开项目根目录下的`deeponet.ipynb`文件（使用`jupyter notebook`打开），设置想要训练的轮数`num_epochs`和批大小`batchsize`，然后运行即可。
 
 ## Tips
 
